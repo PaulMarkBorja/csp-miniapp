@@ -14,17 +14,8 @@ class SongsController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $song = new Songs();
+        return $song->latest()->get();
     }
 
     /**
@@ -35,51 +26,43 @@ class SongsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $song = Songs::create($request->all());
+        return response($song);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Songs  $songs
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Songs $songs)
+    public function show(Songs $song)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Songs  $songs
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Songs $songs)
-    {
-        //
+        return $song;
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Songs  $songs
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Songs $songs)
+    public function update(Request $request, Songs $song)
     {
-        //
+        $song->update($request->all());
+        return response('Updated successfully', 200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Songs  $songs
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Songs $songs)
+    public function destroy(Songs $song)
     {
-        //
+        $song->delete();
+        return response('Songs deleted successfully', 200);
     }
 }
